@@ -1,7 +1,8 @@
 ## Timeline Planner
 
-- React + TailwindCSS + Vite 製作的任務系統
+- 簡易時間軸任務管理系統
 - 資料可以支援匯入匯出，操作時儲存於 localStorage。
+- Tech Stack: React + TailwindCSS + Vite
 
 ### 開發與佈署
 

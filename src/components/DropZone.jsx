@@ -28,7 +28,7 @@ function DropZone({ engineer, month, onDrop, children, onAddTask }) {
                     <button
                         onClick={() => onAddTask(engineer.id, month)}
                         className="text-xs text-blue-600 border border-blue-400 rounded px-1 bg-white"
-                    >+ 任務</button>
+                    >+ New</button>
                 </div>
             )}
         </td>

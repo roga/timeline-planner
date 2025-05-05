@@ -101,7 +101,7 @@ function Timeline() {
         localStorage.setItem("timelineData", JSON.stringify(newData));
     };
 
-    // 開始編輯工程師名稱
+    // 開始編輯人物名稱
     const handleStartEditName = (engineer) => {
         setEditingEngineerId(engineer.id);
         setEditingEngineerName(engineer.name);
@@ -114,7 +114,7 @@ function Timeline() {
         }, 10);
     };
 
-    // 儲存工程師名稱
+    // 儲存人物名稱
     const handleSaveEngineerName = () => {
         if (!editingEngineerId || !editingEngineerName.trim()) {
             setEditingEngineerId(null);
@@ -208,7 +208,7 @@ function Timeline() {
         const taskToUpdate = data.tasks.find(t => t.id === item.id);
         if (!taskToUpdate) return;
         
-        // 如果是同一個工程師的同一個月份，則不需要操作
+        // 如果是同一個人物的同一個月份，則不需要操作
         if (taskToUpdate.engineerId === targetEngineerId && taskToUpdate.month === targetMonth) {
             return;
         }
@@ -263,9 +263,9 @@ function Timeline() {
         saveData({ ...data, tasks: newTasks });
     };
 
-    // 新增工程師
+    // 新增
     const handleAddEngineer = () => {
-        const name = prompt("請輸入新工程師名字");
+        const name = prompt("請輸入新的名字");
         if (!name) return;
         
         const exists = data.engineers.some(e => e.name === name);
@@ -277,14 +277,14 @@ function Timeline() {
         saveData({ ...data, engineers: newEngineers });
     };
 
-    // 刪除工程師
+    // 刪除
     const handleDeleteEngineer = (engineerId) => {
         const engineer = data.engineers.find(e => e.id === engineerId);
         if (!engineer) return;
         
         if (!window.confirm(`確定要刪除 ${engineer.name} 嗎？`)) return;
         
-        // 刪除工程師及其相關任務
+        // 刪除人物及其相關任務
         const newEngineers = data.engineers.filter(e => e.id !== engineerId);
         const newTasks = data.tasks.filter(t => t.engineerId !== engineerId);
         
@@ -305,7 +305,7 @@ function Timeline() {
         return map;
     }, [data.tasks]);
 
-    // 獲取指定工程師的任務
+    // 獲取指定人物的任務
     const getEngineerTasks = (engineerId) => {
         return data.tasks.filter(task => task.engineerId === engineerId);
     };
@@ -315,9 +315,9 @@ function Timeline() {
             <DndProvider backend={HTML5Backend}>
                 <div className="p-4 space-y-4">
                     <div className="flex gap-2">
-                        <button onClick={handleAddEngineer} className="px-3 py-1 bg-green-200 rounded">新增工程師</button>
-                        <button onClick={handleExportJSON} className="px-3 py-1 bg-blue-300 text-white rounded">匯出 JSON</button>
-                        <button onClick={() => fileInputRef.current.click()} className="px-3 py-1 bg-blue-300 text-white rounded">匯入 JSON</button>
+                        <button onClick={handleAddEngineer} className="px-3 py-1 bg-green-200 rounded">New Owner</button>
+                        <button onClick={handleExportJSON} className="px-3 py-1 bg-blue-300 text-white rounded">Export JSON</button>
+                        <button onClick={() => fileInputRef.current.click()} className="px-3 py-1 bg-blue-300 text-white rounded">Import JSON</button>
                     </div>
                     <input ref={fileInputRef} type="file" accept="application/json" className="hidden" onChange={handleImportJSON} />
                     <a ref={downloadLinkRef} className="hidden"></a>
@@ -326,7 +326,7 @@ function Timeline() {
                         <table className="table-fixed border-collapse w-auto">
                             <thead>
                             <tr>
-                                <th className="sticky left-0 z-10 min-w-[150px] w-[150px] bg-gray-200 border border-gray-400 text-center">工程師</th>
+                                <th className="sticky left-0 z-10 min-w-[150px] w-[150px] bg-gray-200 border border-gray-400 text-center">Owner</th>
                                 {months.map(month => (
                                     <th key={month} className={`bg-gray-200 border border-gray-400 text-center ${collapsedMonths[month] ? 'w-[30px] min-w-[30px] p-0' : 'w-[150px] min-w-[150px]'}`}>
                                         <div className="flex justify-center items-center">
@@ -334,7 +334,7 @@ function Timeline() {
                                             <button 
                                                 onClick={() => toggleMonthCollapse(month)}
                                                 className={`${collapsedMonths[month] ? 'text-xs w-full py-1' : 'ml-1 text-xs'} text-gray-600 hover:text-black px-1 rounded hover:bg-gray-300`}
-                                                title={collapsedMonths[month] ? "展開" : "收折"}
+                                                title={collapsedMonths[month] ? "expand" : "collapse"}
                                             >
                                                 {collapsedMonths[month] ? '→' : '←'}
                                             </button>
@@ -389,7 +389,7 @@ function Timeline() {
                                             <button
                                                 onClick={() => handleDeleteEngineer(engineer.id)}
                                                 className="text-xs text-red-500 border border-red-500 rounded px-1 bg-white"
-                                            >刪除</button>
+                                            >Delete</button>
                                         </div>
                                     </td>
                                     {months.map(month => (
