@@ -144,7 +144,7 @@ function Timeline() {
             // 設置下載鏈接
             if (downloadLinkRef.current) {
                 downloadLinkRef.current.href = url;
-                downloadLinkRef.current.download = "timelineData.json";
+                downloadLinkRef.current.download = `timeline_${new Date().toLocaleDateString().replace(/[:.]/g, "-")}_${new Date().toLocaleTimeString().replace(/[:.]/g, "-")}.json`;
                 
                 // 觸發點擊事件
                 downloadLinkRef.current.click();
