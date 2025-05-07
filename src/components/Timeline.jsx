@@ -343,7 +343,7 @@ function Timeline() {
                                                     className={`${collapsedMonths[month] ? 'text-xs w-full py-1' : 'ml-1 text-xs'} text-gray-600 hover:text-black px-1 rounded hover:bg-gray-300`}
                                                     title={collapsedMonths[month] ? "expand" : "collapse"}
                                                 >
-                                                    {collapsedMonths[month] ? '→' : '←'}
+                                                    {collapsedMonths[month] ? '+' : '←'}
                                                 </button>
                                             </div>
                                         </th>

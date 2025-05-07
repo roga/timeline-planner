@@ -1,6 +1,7 @@
 {
-  "name": "engineer-timeline",
+  "name": "timeline-planner",
   "version": "1.0.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "vite",
