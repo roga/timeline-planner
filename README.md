@@ -5,7 +5,7 @@
 - Tech Stack: React + TailwindCSS + Vite
 
 ### screenshot
-<img width="500" alt="截圖 2025-05-07 13 10 25" src="https://github.com/user-attachments/assets/3a89816c-9a34-4ee3-93f6-b9a9e5565971" />
+<img width="800" alt="截圖 2025-05-07 13 10 25" src="https://github.com/user-attachments/assets/3a89816c-9a34-4ee3-93f6-b9a9e5565971" />
 
 
 ### 開發與佈署
