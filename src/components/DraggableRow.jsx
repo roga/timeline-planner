@@ -63,13 +63,8 @@ function DraggableRow({ engineer, index, moveEngineer, children }) {
         <motion.tr
             ref={ref}
             layout
-            initial={{ opacity: 0 }}
-            animate={{ 
-                opacity: isDragging ? 0.5 : 1, 
-                scale: isDragging ? 0.98 : 1,
-                boxShadow: isOver ? '0 0 10px rgba(0, 0, 255, 0.5)' : 'none',
-                backgroundColor: isOver ? 'rgba(200, 220, 255, 0.2)' : 'transparent'
-            }}
+            initial={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+            animate={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }} // 過渡到半透明
             transition={{ 
                 type: "spring", 
                 stiffness: 300, 

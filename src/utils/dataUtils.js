@@ -5,7 +5,7 @@ export const months = [
     "2025-09", "2025-10", "2025-11", "2025-12"
 ];
 
-export const statuses = { done: "🟢", ongoing: "🟡", delayed: "🔴" };
+export const statuses = { done: "🟢", ongoing: "🟡", delayed: "🔴", todo : "⚪" };
 export const statusOptions = Object.keys(statuses);
 
 // 預設資料

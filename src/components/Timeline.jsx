@@ -315,9 +315,9 @@ function Timeline() {
             <DndProvider backend={HTML5Backend}>
                 <div className="p-4 space-y-4">
                     <div className="flex gap-2">
-                        <button onClick={handleAddEngineer} className="px-3 py-1 bg-green-200 rounded">New Owner</button>
-                        <button onClick={handleExportJSON} className="px-3 py-1 bg-blue-300 text-white rounded">Export JSON</button>
-                        <button onClick={() => fileInputRef.current.click()} className="px-3 py-1 bg-blue-300 text-white rounded">Import JSON</button>
+                        <button onClick={handleAddEngineer} className="px-3 py-1 bg-gray-200 rounded">New Owner</button>
+                        <button onClick={handleExportJSON} className="px-3 py-1 bg-gray-200 rounded">Export JSON</button>
+                        <button onClick={() => fileInputRef.current.click()} className="px-3 py-1 bg-gray-200 rounded">Import JSON</button>
                     </div>
                     <input ref={fileInputRef} type="file" accept="application/json" className="hidden" onChange={handleImportJSON} />
                     <a ref={downloadLinkRef} className="hidden"></a>
@@ -326,21 +326,29 @@ function Timeline() {
                         <table className="table-fixed border-collapse w-auto">
                             <thead>
                             <tr>
-                                <th className="sticky left-0 z-10 min-w-[150px] w-[150px] bg-gray-200 border border-gray-400 text-center">Owner</th>
-                                {months.map(month => (
-                                    <th key={month} className={`bg-gray-200 border border-gray-400 text-center ${collapsedMonths[month] ? 'w-[30px] min-w-[30px] p-0' : 'w-[150px] min-w-[150px]'}`}>
-                                        <div className="flex justify-center items-center">
-                                            {!collapsedMonths[month] && <span>{month}</span>}
-                                            <button 
-                                                onClick={() => toggleMonthCollapse(month)}
-                                                className={`${collapsedMonths[month] ? 'text-xs w-full py-1' : 'ml-1 text-xs'} text-gray-600 hover:text-black px-1 rounded hover:bg-gray-300`}
-                                                title={collapsedMonths[month] ? "expand" : "collapse"}
-                                            >
-                                                {collapsedMonths[month] ? '→' : '←'}
-                                            </button>
-                                        </div>
-                                    </th>
-                                ))}
+                                <th className="sticky left-0 z-10 min-w-[150px] w-[150px] bg-gray-400 border border-gray-400 text-center">Owner</th>
+                                {months.map(month => {
+                                    const currentMonth = `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}`;
+                                    const isCurrentMonth = currentMonth === month; // 檢查是否為當月
+                                    return (
+                                        <th
+                                            key={month}
+                                            className={`bg-gray-400 border border-gray-400 text-center ${collapsedMonths[month] ? 'w-[30px] min-w-[30px] p-0' : 'w-[150px] min-w-[150px]'}`}
+                                            style={isCurrentMonth ? { backgroundColor: 'rgba(102, 17, 117, 0.23)' } : {}} // 當月背景色
+                                        >
+                                            <div className="flex justify-center items-center">
+                                                {!collapsedMonths[month] && <span>{month}</span>}
+                                                <button 
+                                                    onClick={() => toggleMonthCollapse(month)}
+                                                    className={`${collapsedMonths[month] ? 'text-xs w-full py-1' : 'ml-1 text-xs'} text-gray-600 hover:text-black px-1 rounded hover:bg-gray-300`}
+                                                    title={collapsedMonths[month] ? "expand" : "collapse"}
+                                                >
+                                                    {collapsedMonths[month] ? '→' : '←'}
+                                                </button>
+                                            </div>
+                                        </th>
+                                    );
+                                })}
                             </tr>
                             </thead>
                             <tbody>
