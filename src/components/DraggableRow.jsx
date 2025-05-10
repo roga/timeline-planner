@@ -53,9 +53,6 @@ function DraggableRow({ engineer, index, moveEngineer, children }) {
         })
     });
     
-    // 設置拖拽預覽
-    const dragPreview = useRef(null);
-    
     // 將 drag 和 drop 連接到元素
     drag(drop(ref));
 
@@ -64,18 +61,15 @@ function DraggableRow({ engineer, index, moveEngineer, children }) {
             ref={ref}
             layout
             initial={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
-            animate={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }} // 過渡到半透明
+            animate={{ backgroundColor: isDragging ? "rgba(0, 0, 0, 0.5)" : "rgba(0, 0, 0, 0)" }}
             transition={{ 
                 type: "spring", 
                 stiffness: 300, 
                 damping: 30 
             }}
-            className={`${isOver ? 'bg-blue-50' : ''} cursor-move relative`}
+            className={`${isOver ? 'bg-blue-50' : ''} ${isDragging ? 'opacity-50' : ''} cursor-move relative`}
         >
             {children}
-            {isDragging && (
-                <div className="absolute inset-0 bg-blue-100 opacity-20 pointer-events-none"></div>
-            )}
         </motion.tr>
     );
 }

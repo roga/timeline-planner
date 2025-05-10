@@ -5,7 +5,7 @@ export const months = [
     "2025-09", "2025-10", "2025-11", "2025-12"
 ];
 
-export const statuses = { done: "🟢", ongoing: "🟡", delayed: "🔴", todo : "⚪" };
+export const statuses = { DONE: "🟢", WIP: "🟡", DELAYED: "🔴", TODO : "⚪" };
 export const statusOptions = Object.keys(statuses);
 
 // 預設資料
@@ -15,9 +15,9 @@ export const defaultData = {
         { id: "e2", name: "test" }
     ],
     tasks: [
-        { id: 1, engineerId: "e1", project: "API", summary: "設計 POST API", status: "ongoing", month: "2025-01" },
-        { id: 2, engineerId: "e1", project: "Web", summary: "頁面排版", status: "done", month: "2025-02" },
-        { id: 3, engineerId: "e2", project: "DB", summary: "建表與索引", status: "delayed", month: "2025-01" }
+        { id: 1, engineerId: "e1", project: "API", summary: "設計 POST API", status: "WIP", startDate: "2025-01-01", endDate: "2025-01-31" },
+        { id: 2, engineerId: "e1", project: "Web", summary: "頁面排版", status: "DONE", startDate: "2025-02-01", endDate: "2025-02-28" },
+        { id: 3, engineerId: "e2", project: "DB", summary: "建表與索引", status: "TODO", startDate: "2025-01-01", endDate: "2025-01-31" }
     ]
 };
 
