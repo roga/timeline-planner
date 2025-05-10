@@ -27,11 +27,13 @@ function Timeline() {
     const editNameInputRef = useRef(null);
     const [showNewTaskModal, setShowNewTaskModal] = useState(false);
     const [currentDate, setCurrentDate] = useState(new Date());
+    const [showOnlyTitles, setShowOnlyTitles] = useState(false);
 
     // 提供 context value
     const contextValue = useMemo(() => ({
         collapsedMonths,
-    }), [collapsedMonths]);
+        showOnlyTitles,
+    }), [collapsedMonths, showOnlyTitles]);
 
     // 切換月份收折狀態
     const toggleMonthCollapse = (month) => {
@@ -414,7 +416,7 @@ function Timeline() {
                 className={`border border-gray-400 align-top p-0 bg-white hover:bg-gray-50 transition-colors ${isOver ? 'bg-gray-100' : ''}`}
             >
                 {!collapsedMonths[month] && (
-                    <div className="p-1 min-h-[100px]">
+                    <div className="py-1 min-h-[100px]">
                         {tasks.map(task => (
                             <TaskCard
                                 key={task.id}
@@ -448,6 +450,9 @@ function Timeline() {
                         <button onClick={() => setShowNewTaskModal(true)} className="px-3 py-1 bg-gray-200 rounded">New Task</button>
                         <button onClick={handleExportJSON} className="px-3 py-1 bg-gray-200 rounded">Export JSON</button>
                         <button onClick={() => fileInputRef.current.click()} className="px-3 py-1 bg-gray-200 rounded">Import JSON</button>
+                        <button onClick={() => setShowOnlyTitles(!showOnlyTitles)} className="px-3 py-1 bg-gray-200 rounded">
+                            {showOnlyTitles ? 'Show All' : 'Hide Details'}
+                        </button>
                     </div>
                     <input ref={fileInputRef} type="file" accept="application/json" className="hidden" onChange={handleImportJSON} />
                     <a ref={downloadLinkRef} className="hidden"></a>

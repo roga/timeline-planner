@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useDrag } from "react-dnd";
 import { motion } from "framer-motion";
 import { statuses } from "../utils/dataUtils";
 import { ItemType } from "../utils/constants";
 import { getStatusColor, generateTitleColor } from "../utils/colorUtils";
+import TimelineContext from "../contexts/TimelineContext";
 
 const TaskCard = ({ task, engineer, onEdit, onDelete, projectColor, isFirstMonth, isLastMonth }) => {
+    const { showOnlyTitles } = useContext(TimelineContext);
     const [{ isDragging }, drag] = useDrag(() => ({
         type: ItemType,
         item: { id: task.id },
@@ -19,20 +21,20 @@ const TaskCard = ({ task, engineer, onEdit, onDelete, projectColor, isFirstMonth
             ref={drag}
             className={`
                 group relative mb-1 rounded-lg border shadow-md
-                ${isFirstMonth ? 'border-l-2' : 'border-l-4'}
-                ${isLastMonth ? 'border-r-2' : 'border-r-4'}
-                ${isFirstMonth ? 'ml-0' : 'ml-1'}
-                ${isLastMonth ? 'mr-0' : 'mr-1'}
+                ${isFirstMonth ? 'border-l-1' : 'border-l-0'}
+                ${isLastMonth ? 'border-r-1' : 'border-r-0'}
                 ${isFirstMonth ? 'rounded-l-md' : 'rounded-l-sm'}
                 ${isLastMonth ? 'rounded-r-md' : 'rounded-r-sm'}
-                ${isFirstMonth ? 'pl-2' : 'pl-1'}
-                ${isLastMonth ? 'pr-2' : 'pr-1'}
+                ${isFirstMonth ? 'pl-1' : 'pl-1'}
+                ${isLastMonth ? 'pr-1' : 'pr-1'} 
+                ${isFirstMonth ? 'ml-1' : 'ml-1'}
+                ${isLastMonth ? 'mr-1' : 'mr-1'}
                 bg-white
                 hover:bg-gray-50
                 transition-all duration-200 ease-in-out
                 ${isDragging ? 'opacity-50' : 'opacity-100'}
                 ${isFirstMonth ? 'cursor-move' : 'cursor-default'}
-                h-[120px]
+                ${showOnlyTitles ? 'h-[40px]' : 'h-[120px]'}
             `}
             style={{
                 borderLeftColor: isFirstMonth ? projectColor : 'transparent',
@@ -46,18 +48,22 @@ const TaskCard = ({ task, engineer, onEdit, onDelete, projectColor, isFirstMonth
             <div className="p-1.5 h-full flex flex-col">
                 <div className="flex items-start justify-between gap-2 flex-1">
                     <div className="flex-1 min-w-0">
-                        <div className={`flex items-center mb-1 ${generateTitleColor(task.project)} rounded-md px-2 py-1`}>
+                        <div className={`flex items-center ${showOnlyTitles ? 'mb-0' : 'mb-1'} ${generateTitleColor(task.project)} rounded-md px-2 py-1`}>
                             <span className="text-sm font-bold truncate text-white">
                                 {task.project}
                             </span>
                         </div>
-                        <p className="text-sm text-gray-700 line-clamp-2 px-1">
-                            {task.summary}
-                        </p>
-                        <hr className="my-1 border-gray-200" />
+                        {!showOnlyTitles && (
+                            <>
+                                <p className="text-sm text-gray-700 line-clamp-2 px-1">
+                                    {task.summary}
+                                </p>
+                                <hr className="my-1 border-gray-200" />
+                            </>
+                        )}
                     </div>
-                    </div>
-                    {isFirstMonth && (
+                </div>
+                {isFirstMonth && !showOnlyTitles && (
                     <div className="mt-auto">
                         <div className="flex items-center justify-end gap-1">
                             <span className={`text-xs px-2 py-1 rounded-full ${getStatusColor(task.status)} font-medium`}>
