@@ -210,33 +210,33 @@ function Timeline() {
         // 找到要更新的任務
         const taskToUpdate = data.tasks.find(t => t.id === item.id);
         if (!taskToUpdate) return;
-
+        
         // 計算目標月份的開始和結束日期
         const [year, month] = targetMonth.split('-');
         const startDate = `${year}-${month}-01`;
         const lastDay = new Date(parseInt(year), parseInt(month), 0).getDate();
         const endDate = `${year}-${month}-${lastDay}`;
-
+        
         // 如果是同一個人物的同一個月份，則不需要操作
         if (taskToUpdate.engineerId === targetEngineerId && 
             taskToUpdate.startDate === startDate && 
             taskToUpdate.endDate === endDate) {
             return;
         }
-
+        
         // 更新任務
         const newTasks = data.tasks.map(t => {
             if (t.id === item.id) {
-                return {
-                    ...t,
-                    engineerId: targetEngineerId,
+                return { 
+                    ...t, 
+                    engineerId: targetEngineerId, 
                     startDate: startDate,
                     endDate: endDate
                 };
             }
             return t;
         });
-
+        
         saveData({ ...data, tasks: newTasks });
     };
     
@@ -332,14 +332,14 @@ function Timeline() {
     const getEngineerTasks = (engineerId, month) => {
         return data.tasks
             .filter(task => {
-                const taskStartMonth = task.startDate.substring(0, 7);
-                const taskEndMonth = task.endDate.substring(0, 7);
-                const currentMonth = month;
-                
-                // 檢查當前月份是否在任務的開始和結束月份之間
-                return task.engineerId === engineerId && 
-                       months.indexOf(currentMonth) >= months.indexOf(taskStartMonth) && 
-                       months.indexOf(currentMonth) <= months.indexOf(taskEndMonth);
+            const taskStartMonth = task.startDate.substring(0, 7);
+            const taskEndMonth = task.endDate.substring(0, 7);
+            const currentMonth = month;
+            
+            // 檢查當前月份是否在任務的開始和結束月份之間
+            return task.engineerId === engineerId && 
+                   months.indexOf(currentMonth) >= months.indexOf(taskStartMonth) && 
+                   months.indexOf(currentMonth) <= months.indexOf(taskEndMonth);
             })
             .sort((a, b) => {
                 // 檢查是否為跨月任務
@@ -353,7 +353,7 @@ function Timeline() {
                 
                 // 如果跨月狀態相同，則依照標題排序
                 return a.project.localeCompare(b.project);
-            });
+        });
     };
 
     // 計算任務跨越的月份數
@@ -532,11 +532,11 @@ function Timeline() {
                                         </td>
                                         {months.map((month, monthIndex) => (
                                             <MonthCell
-                                                key={month}
+                                                    key={month} 
                                                 engineerId={engineer.id}
                                                 month={month}
-                                            />
-                                        ))}
+                                                                />
+                                                            ))}
                                     </DraggableRow>
                                 ))}
                             </tbody>
