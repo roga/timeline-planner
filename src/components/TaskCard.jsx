@@ -56,8 +56,8 @@ const TaskCard = ({ task, engineer, onEdit, onDelete, projectColor, isFirstMonth
                         </p>
                         <hr className="my-1 border-gray-200" />
                     </div>
-                </div>
-                {isFirstMonth && (
+                    </div>
+                    {isFirstMonth && (
                     <div className="mt-auto">
                         <div className="flex items-center justify-end gap-1">
                             <span className={`text-xs px-2 py-1 rounded-full ${getStatusColor(task.status)} font-medium`}>
